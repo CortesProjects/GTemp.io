@@ -27,3 +27,31 @@ c:\Users\name\repository-github\back-end>back-end\Scripts\activate
 (back-end) c:\Users\name\repository-github\back-end>
 # afterwards install the package "uvicorn supabase passlib[bcrypt] python-jose python-dotenv"
 pip install fastapi uvicorn supabase passlib[bcrypt] python-jose python-dotenv
+
+# setup for frontend
+(back-end) c:\Users\name\repository-github\back-end>
+c..
+# current status 
+(back-end) c:\Users\name\repository-github>
+deativate
+# setupd for backend
+(back-end) c:\Users\name\repository-github\back-end> .env
+deativate or not it doesn't matter
+c:\Users\name\repository-github\back-end> .env
+
+repository-github/                ← your main project folder
+│
+├── frontend/       ← React (Vite) app
+│   ├── package.json
+│   ├── vite.config.js
+│   ├── src/
+│   │   ├── App.jsx
+│   │   ├── Register.jsx
+│   │   └── Login.jsx
+│   └── node_modules/
+│
+└── backend/        ← FastAPI app
+    ├── venv/            ← Python virtual environment
+    ├── .env             ← Supabase secrets
+    ├── main.py          ← FastAPI code
+    └── requirements.txt (optional)
