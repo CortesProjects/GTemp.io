@@ -72,3 +72,40 @@ app.add_middleware(
 # run the backend
 uvicorn main:app --reload
 
+# SUMMARY
+
+# back-end
+# create backend folder + venv
+mkdir auth-backend && cd auth-backend
+python -m venv venv
+venv\Scripts\activate        # (Windows)
+# install backend deps
+pip install fastapi uvicorn supabase starlette
+pip freeze > requirements.txt
+# run backend
+uvicorn main:app --reload
+
+# front-end
+# create frontend with Vite
+cd ..
+npm create vite@latest auth-frontend
+cd auth-frontend
+# install frontend deps
+npm install axios react-router-dom
+# run frontend
+npm run dev
+
+main.py must have
+url                                                         # to connect to database "which destination you should go after passing a bridge of API"
+key                                                         # to connect to API of supabase "serve as a bridge before reaching destination"
+from fastapi.middleware.cors import CORSMiddleware          #library for add_middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],                # call frontend URL
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+
