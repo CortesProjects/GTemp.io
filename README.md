@@ -24,7 +24,7 @@ repository/
 │   ├── vite.config.js
 │   └── src/
 │       ├── App.jsx
-│       ├── main.jsx    asdsadadadasdasdasd
+│       ├── main.jsx
 │       └── pages/
 │           ├── Login.jsx
 │           └── Register.jsx
