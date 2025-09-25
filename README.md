@@ -95,6 +95,7 @@ venv\Scripts\activate
 pip install "fastapi[all]" uvicorn supabase Django       # install packages
 pip freeze > requirements.txt                            # creates .txt and stores it inside
 Django.admin startproject myproject
+cd myproject
 python manage.py startapp myapp    # can't execute command? place myproject/myproject outside myproject/ folder
 
 # add these in myproject/settings.py
@@ -112,12 +113,15 @@ urlpatterns = [
 def home(request):
     return render(request, 'app/home.html') #i called templates/home.html
 
+#inside myproject/urls.py add
+path("", include("authapp.urls")),
 
+
+#inside myproject/settings.py
 INSTALLED_APPS = [
     ...,
     'myapp',
 ]
-
 
 # connect frontend and backend
 'DIRS': [os.path.join(BASE_DIR, "..", "frontend", "templates")]
