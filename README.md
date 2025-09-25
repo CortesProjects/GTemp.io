@@ -1,111 +1,140 @@
-<img width="2542" height="706" alt="image" src="https://github.com/user-attachments/assets/c6c23594-883d-44a3-8033-36c96155a7f6" /># GTemp.io
-A Marketplace of Game Templates for Roblox Studios, Unity, and Godot engine
-
-i want to make a log in and registration page: py(backend), .jsx(frontend), supabase(database) 
-1. register new account and send to database, next. [username, email, password, repeat password] 
-2. check account if exists and matches credentials from database when logging in. [username, password] 
-
-in my Gtemp.io folder show me visualization what is inside this folder look like. guide me what to do first, step 1 - step...: what is first 
-type this command first? or 
-create this file and paste contents on this file first?
-
-i dont like create-react-app, i want vite@latest
-
-repository/
+myproject/
 │
-├── backend/                # Python backend (FastAPI/Flask)
-│   ├── venv/               # Python virtual environment
-│   ├── main.py             # Backend entry (API routes: register/login)
-│   └── requirements.txt    # remain it empty, it may have text later after intalling Python dependencies
+├── manage.py
+├── myproject/
+│   ├── settings.py
+│   ├── urls.py
+│   └── ...
+└── app/                # <-- we will create this app
+    ├── views.py
+    ├── urls.py
+    ├── templates/
+    │   └── app/
+    │       ├── home.html
+    │       ├── page1.html
+    │       └── page2.html
+    └── static/
+        └── app/
+            └── script.js
+
+python -m venv [envname]
+[envname]\Scripts\activate      #activate the environment
+pip install Django              #current instance ([envname]) install package Django
+django-admin startproject [foldername]
+cd [foldername]
+python manage.py runserver                #similar to "npm run dev" or "uvicorn main:app --reload"
+python manage.py startapp [foldername2]   #inside [foldername]
+
+#all startapp [folders] should be added in
+INSTALLED_APPS = [
+    ...,
+    'app', #call the folders that was created with "startapp" NOT "startproject"
+]
+#create folder templates for htmls
+
+#inside myapp/views.py create location link, and function file location and function
+urlpatterns = [
+    path('link1/', file1.function_1),
+    path('link2/', file1.function_2),
+    path('link3/', file1.funcrion_3),
+]
+
+#inside myapp/urls.py create a function that calls the templates when server is run
+def home(request):
+    return render(request, 'app/home.html') #i called templates/home.html
+
+#inside myproject/settings.py 
+"DIRS": [BASE_DIR / "myapp" / "#if you want to add more"], #add templates to app/templates
+
+#inside myproject/urls.py use this code, to call the function app/urls.py
+path('', include('app.urls')),
+
+python manage.py runserver 
+
+
+
+
+PythonFrontend/
 │
-├── frontend/               # React frontend (Vite)
-│   ├── index.html
-│   ├── package.json
-│   ├── vite.config.js
-│   └── src/
-│       ├── App.jsx
-│       ├── main.jsx
-│       └── pages/
-│           ├── Login.jsx
-│           └── Register.jsx
-└── README.md               # Notes/documentation
+├── backend/                        # Django backend
+│   ├── mybackend/                  # Django project settings
+│   │   ├── __init__.py
+│   │   ├── settings.py
+│   │   ├── urls.py
+│   │   └── wsgi.py
+│   │
+│   ├── authapp/                    # Django app for authentication
+│   │   ├── migrations/
+│   │   ├── __init__.py
+│   │   ├── views.py
+│   │   ├── urls.py
+│   │   ├── models.py   (optional, mostly Supabase used here)
+│   │   └── forms.py    (optional, Django forms if you want)
+│   │
+│   ├── manage.py
+│
+├── frontend/                       # Templates & static files
+│   ├── templates/
+│   │   ├── login.html
+│   │   └── register.html
+│   │
+│   └── static/                     # CSS, JS, Images
+│       ├── css/
+│       │   └── style.css
+│       ├── js/
+│       └── img/
+│
+├── venv/                           # Virtual environment
+└── requirements.txt
 
-# create folder repository and go inside
-cd repository
-# create folder
-mkdir [foldername] && cd [foldername] #auth-backend inside repository
-# inside auth-backend folder, create folder for backend, then activate venv
-python -m venv [foldername] #similar to npm create vite@latest [foldername]
-venv\Scripts\activate      # (Windows)
-# paste on activate venv instance: (venv) C:\Users\yourname\repository\auth-backend>
-pip install fastapi uvicorn supabase
-pip freeze > requirements.txt
-# lets create main.py that has the url and key of our supabase to direct us to our web page, then paste our url and key of our supabase
-(venv) C:\Users\yourname\repository\auth-backend>code .    #create main.py program that has url and key or our supabase
-C:\Users\yourname\repository\auth-backend>code .           #it doesn't matter if venv is activated or not
-# lets run activated backend to connect with supabase
-uvicorn main:app --reload
-## Setup Supabase Database
-# open new terminal or ctrl + c: objective go back to C:\Users\yourname\repository\
-cd gtemp.io or cd c..
-# create foldder for frontend
-npm create vite@latest [foldername] //auth-frontend
-# install dependencies
-npm install axios
-# install package
-npm install react-router-dom
-# go to old terminal which we are running backend
-crtl + c                     #to stop running
-# install CORS dependencies
-pip install fastapi[all]
-pip install starlette
-# add at the very top of main.py
-from fastapi.middleware.cors import CORSMiddleware
-# add right after app = FastAPI()
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # frontend URL
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-# run the backend
-uvicorn main:app --reload
 
-# SUMMARY
+Backend
 
-# back-end
-# create backend folder + venv
-mkdir auth-backend && cd auth-backend
 python -m venv venv
-venv\Scripts\activate        # (Windows)
-# install backend deps
-pip install fastapi uvicorn supabase starlette
-pip freeze > requirements.txt
-# run backend
-uvicorn main:app --reload
+venv\Scripts\activate
+pip install "fastapi[all]" uvicorn supabase Django       # install packages
+pip freeze > requirements.txt                            # creates .txt and stores it inside
+Django.admin startproject myproject
+python manage.py startapp myapp    # can't execute command? place myproject/myproject outside myproject/ folder
 
-# front-end
-# create frontend with Vite
-cd ..
-npm create vite@latest auth-frontend
-cd auth-frontend
-# install frontend deps
-npm install axios react-router-dom
-# run frontend
-npm run dev
+# add these in myproject/settings.py
+SUPABASE_URL = os.getenv("SUPABASE_URL", "https://YOUR_PROJECT.supabase.co") # replace with your supabase url 
+SUPABASE_KEY = os.getenv("SUPABASE_KEY", "YOUR_ANON_KEY") #replace with your supabase URL
 
-main.py must have
-url                                                         # to connect to database "which destination you should go after passing a bridge of API"
-key                                                         # to connect to API of supabase "serve as a bridge before reaching destination"
-from fastapi.middleware.cors import CORSMiddleware          #library for add_middleware
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["http://localhost:5173"],                # call frontend URL
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+
+# inside myapp/urls.py create location link, and function file location and function
+urlpatterns = [
+    path('login/', views.login, name='login'),
+    path('register/', views.register, name='register'),
+]
+
+#inside myapp/views.py create a function that calls the templates when server is run
+def home(request):
+    return render(request, 'app/home.html') #i called templates/home.html
+
+
+INSTALLED_APPS = [
+    ...,
+    'myapp',
+]
+
+
+# connect frontend and backend
+'DIRS': [os.path.join(BASE_DIR, "..", "frontend", "templates")]
+
+cd..
+mkdir frontend
+code frontend
+
+paste register.html
+paste login.html
+
+cd backend && python manage.py runserver
+[or]
+cd backend
+python manage.py runserver
+[or]
+python \backend\manage.py runserver
 
 
 
