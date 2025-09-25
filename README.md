@@ -94,16 +94,16 @@ python -m venv venv
 venv\Scripts\activate
 pip install "fastapi[all]" uvicorn supabase Django       # install packages
 pip freeze > requirements.txt                            # creates .txt and stores it inside
-Django.admin startproject myproject
+Django-admin startproject myproject
 cd myproject
 python manage.py startapp myapp    # can't execute command? place myproject/myproject outside myproject/ folder
 
-# add these in myproject/settings.py
-SUPABASE_URL = os.getenv("SUPABASE_URL", "https://YOUR_PROJECT.supabase.co") # replace with your supabase url 
-SUPABASE_KEY = os.getenv("SUPABASE_KEY", "YOUR_ANON_KEY") #replace with your supabase URL
+
 
 
 # inside myapp/urls.py create location link, and function file location and function
+from django.urls import path
+from . import views
 urlpatterns = [
     path('login/', views.login, name='login'),
     path('register/', views.register, name='register'),
@@ -116,6 +116,10 @@ def home(request):
 #inside myproject/urls.py add
 path("", include("authapp.urls")),
 
+
+# add these in myproject/settings.py
+SUPABASE_URL = os.getenv("SUPABASE_URL", "https://YOUR_PROJECT.supabase.co") # replace with your supabase url 
+SUPABASE_KEY = os.getenv("SUPABASE_KEY", "YOUR_ANON_KEY") #replace with your supabase URL
 
 #inside myproject/settings.py
 INSTALLED_APPS = [
